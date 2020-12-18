@@ -8,6 +8,7 @@ import api from '../../services/api';
 
 import Header from '../../components/Header';
 
+import formatDate from '../../utils/formatDate';
 import formatValue from '../../utils/formatValue';
 
 import { Container, CardContainer, Card, TableContainer } from './styles';
@@ -16,11 +17,9 @@ interface Transaction {
   id: string;
   title: string;
   value: number;
-  formattedValue: string;
-  formattedDate: string;
   type: 'income' | 'outcome';
   category: { title: string };
-  created_at: Date;
+  created_at: string;
 }
 
 interface Balance {
@@ -109,7 +108,7 @@ const Dashboard: React.FC = () => {
                     </td>
                   )}
                   <td>{transaction.category.title}</td>
-                  <td>{transaction.created_at}</td>
+                  <td>{formatDate(transaction.created_at)}</td>
                 </tr>
               ))}
             </tbody>

@@ -32,6 +32,7 @@ const Import: React.FC = () => {
         }),
       );
       setUploadedFiles([]);
+      history.goBack();
     } catch (err) {
       console.error(err);
     }
@@ -55,13 +56,16 @@ const Import: React.FC = () => {
         <ImportFileContainer>
           <Upload onUpload={submitFile} />
           {!!uploadedFiles.length && <FileList files={uploadedFiles} />}
-
           <Footer>
             <p>
               <img src={alert} alt="Alert" />
               Permitido apenas arquivos CSV
             </p>
-            <button onClick={handleUpload} type="button">
+            <button
+              onClick={handleUpload}
+              hidden={!uploadedFiles.length}
+              type="button"
+            >
               Enviar
             </button>
           </Footer>
